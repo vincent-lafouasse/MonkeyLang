@@ -30,7 +30,29 @@ func (l *Lexer) readChar() {
 func (l *Lexer) NextToken() token.Token {
 	var output_token token.Token
 
-	output_token = newToken(token.PLUS, 0)
+	switch l.ch {
+	case '=':
+		output_token = newToken(token.ASSIGN, l.ch)
+	case ';':
+		output_token = newToken(token.SEMICOLON, l.ch)
+	case '(':
+		output_token = newToken(token.LPAREN, l.ch)
+	case ')':
+		output_token = newToken(token.RPAREN, l.ch)
+	case '{':
+		output_token = newToken(token.LBRACE, l.ch)
+	case '}':
+		output_token = newToken(token.RBRACE, l.ch)
+	case ',':
+		output_token = newToken(token.COMMA, l.ch)
+	case '+':
+		output_token = newToken(token.PLUS, l.ch)
+	case 0:
+		output_token.Type = token.EOF
+		output_token.Literal = ""
+	}
+	l.readChar()
+
 	return output_token
 }
 
