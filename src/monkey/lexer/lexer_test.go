@@ -64,7 +64,7 @@ func TestNextToken(t *testing.T) {
 
 	for i, testCase := range tests {
 		token := lexer.NextToken()
-		fmt.Printf("Matching %q token with %q\n", testCase.expectedType, token.Literal)
+		fmt.Printf("Matching %s token with %q\n", testCase.expectedType, token.Literal)
 
 		if token.Type != testCase.expectedType {
 			t.Fatalf("tests[%d] - wrong token type, expected %q was %q", i, testCase.expectedType, token.Type)
