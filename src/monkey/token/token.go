@@ -38,7 +38,7 @@ var keywords map[string] TokenType {
 	"let": LET,
 }
 
-func loookupIdentifier(identifier string) TokenType {
+func LookupIdentifier(identifier string) TokenType {
 	if token_type, ok = keywords[identifier]; ok {
 		return token_type
 	}
