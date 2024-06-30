@@ -46,10 +46,6 @@ func (l *Lexer) NextToken() token.Token {
 	return output_token
 }
 
-func newToken(tokenType token.TokenType, ch byte) token.Token {
-	return token.Token{Type: tokenType, Literal: string(ch)}
-}
-
 func (l *Lexer) readChar() {
 	if l.readPosition >= len(l.input) {
 		l.ch = 0
@@ -58,6 +54,20 @@ func (l *Lexer) readChar() {
 	}
 	l.position = l.readPosition
 	l.readPosition++
+}
+
+func (l *Lexer) readIdentifier() {
+	start_position = l.position
+
+	for isLetter(l.ch) {
+		l.readChar()
+	}
+
+	return l.input[start_position:l.position]
+}
+
+func newToken(tokenType token.TokenType, ch byte) token.Token {
+	return token.Token{Type: tokenType, Literal: string(ch)}
 }
 
 func isLetter(ch byte) bool {
