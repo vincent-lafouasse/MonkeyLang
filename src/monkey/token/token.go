@@ -33,13 +33,13 @@ const (
 	LET      = "LET"
 )
 
-var keywords map[string] TokenType {
+var keywords = map[string]TokenType {
 	"fn": FUNCTION,
 	"let": LET,
 }
 
 func LookupIdentifier(identifier string) TokenType {
-	if token_type, ok = keywords[identifier]; ok {
+	if token_type, ok := keywords[identifier]; ok {
 		return token_type
 	}
 
