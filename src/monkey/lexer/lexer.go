@@ -20,6 +20,8 @@ func NewLexer(input string) *Lexer {
 func (l *Lexer) NextToken() token.Token {
 	var output_token token.Token
 
+	l.skipWhitespace()
+
 	switch l.ch {
 	case '=':
 		output_token = newToken(token.ASSIGN, l.ch)
@@ -80,4 +82,10 @@ func newToken(tokenType token.TokenType, ch byte) token.Token {
 
 func isLetter(ch byte) bool {
 	return ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch == '_'
+}
+
+func (l *Lexer) skipWhitespace() {
+	for l.ch == ' ' || l.ch == '\n' || l.ch == '\t' || l.ch == '\r' || l.ch == '\v' {
+		l.readChar()
+	}
 }
